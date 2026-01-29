@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Inibae Collections</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F1E8;
+            color: #2A2522;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('Images/logo.png') center/cover no-repeat;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #B8572A;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        
+        @media (max-width: 768px) {
+            .grid-2, .grid-4 { grid-template-columns: 1fr; }
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2C5530;
+        }
+        
+        .timeline-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .value-card {
+            background: #E8DCC4;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background-color: #2C5530;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .icon-circle i {
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: white;
+            color: #2C5530;
+        }
+        
+        .btn-primary:hover {
+            background-color: #F5F1E8;
+            transform: scale(1.05);
+        }
+        
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: #2C5530;
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+            transition: height 0.3s ease;
+            border-radius: 50%;
+        }
+        
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #2C5530;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2A2522;
+        }
+        
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: #2A2522;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: #B8572A;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s;
+            position: relative;
+        }
+        
+        .icon-btn:hover {
+            background: #E8DCC4;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #D4774E;
+            color: white;
+            font-size: 0.75rem;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mobile-menu {
+            display: none;
+            padding: 1rem;
+            border-top: 1px solid #E8DCC4;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            color: #2A2522;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        footer {
+            background: #2A2522;
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .footer-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .newsletter-form {
+            display: flex;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid #555;
+            background: #333;
+            color: white;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+        
+        .newsletter-btn {
+            padding: 0.5rem 1rem;
+            background: #B8572A;
+            color: white;
+            border: none;
+            border-radius: 0 0.5rem 0.5rem 0;
+            cursor: pointer;
+        }
+        
+        .newsletter-btn:hover {
+            background: #D4774E;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 999;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: #20BA5A;
+        }
+        
+        .cta-section {
+            background: #2C5530;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+        }
+        
+        .founder-section {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .founder-img {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .founder-img img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .founder-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #978D83;
+            margin-bottom: 1.5rem;
+        }
+        
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mb-16 { margin-bottom: 4rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+        
+        .bg-white { background: white; }
+        .bg-beige { background: #E8DCC4; }
+        
+        .max-w-4xl {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        
+        .max-w-5xl {
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-col {
+            flex-direction: column;
+        }
+        
+        .gap-4 {
+            gap: 1rem;
+        }
+        
+        .justify-center {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                   
+                        <img src="Images/logo.png" alt="Inibae Collections Logo" class="logo-image">
+                    <h1 class="logo-text">Inibae Collections</h1>
+                </div>
+                
+                <nav>
+                    <a href="Home.html">Home</a>
+                    <a href="Shop.html">Shop</a>
+                    <a href="#" class="active">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                
+                <div class="header-icons">
+                    <button class="icon-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">0</span>
+                    </button>
+                    
+                    <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="Home.html">Home</a>
+                <a href="Shop.html">Shop</a>
+                <a href="#" class="active">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div>
+            <h2 style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem;">Our Story</h2>
+            <p style="font-size: 1.25rem;">Where tradition meets contemporary elegance</p>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="max-w-4xl text-center mb-16">
+                <h2 class="section-title">The Inibae Journey</h2>
+                <p class="text-lg">
+                    Founded in 2023 by fashion enthusiast and cultural advocate Inioluwa Adesina, Inibae Collections was born from a deep desire to celebrate and preserve the rich textile heritage of West Africa. What started as a small workshop in Lagos has blossomed into a movement celebrating African craftsmanship on the global stage.
+                </p>
+                <p class="text-lg">
+                    Every piece we create is a testament to the skill of our artisans, the vibrancy of our culture, and our commitment to sustainable, ethical fashion. We don't just sell clothing – we share stories, preserve traditions, and empower communities.
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-4 text-center">
+                <div>
+                    <div class="stat-number" data-count="1500">0</div>
+                    <div style="color: #978D83; font-weight: 500;">Happy Customers</div>
+                </div>
+                <div>
+                    <div class="stat-number" data-count="120">0</div>
+                    <div style="color: #978D83; font-weight: 500;">Artisans Supported</div>
+                </div>
+                <div>
+                    <div class="stat-number" data-count="9">0</div>
+                    <div style="color: #978D83; font-weight: 500;">Years of Excellence</div>
+                </div>
+                <div>
+                    <div class="stat-number" data-count="25">0</div>
+                    <div style="color: #978D83; font-weight: 500;">Countries Served</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section bg-beige">
+        <div class="container">
+            <h2 class="section-title text-center">Our Milestones</h2>
+            <div class="max-w-4xl" style="margin: 0 auto;">
+                <!-- 2015 -->
+                <div class="timeline-item" style="margin-bottom: 3rem;">
+                    <div class="timeline-content">
+                        <div style="font-size: 3rem; font-weight: bold; color: #2C5530; margin-bottom: 1rem;">2015</div>
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.75rem;">The Beginning</h3>
+                        <p style="color: #978D83;">Inibae Collections was founded with just three artisans and a vision to celebrate African textile heritage. Our first collection featured 15 unique Ankara pieces.</p>
+                    </div>
+                </div>
+
+                <!-- 2017 -->
+                <div class="timeline-item" style="margin-bottom: 3rem;">
+                    <div class="timeline-content">
+                        <div style="font-size: 3rem; font-weight: bold; color: #2C5530; margin-bottom: 1rem;">2017</div>
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.75rem;">International Recognition</h3>
+                        <p style="color: #978D83;">Our designs were featured at Lagos Fashion Week, gaining international attention. We expanded our artisan network to 25 skilled craftspeople.</p>
+                    </div>
+                </div>
+
+                <!-- 2019 -->
+                <div class="timeline-item" style="margin-bottom: 3rem;">
+                    <div class="timeline-content">
+                        <div style="font-size: 3rem; font-weight: bold; color: #2C5530; margin-bottom: 1rem;">2019</div>
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.75rem;">E-Commerce Launch</h3>
+                        <p style="color: #978D83;">Launched our online platform, making authentic African fashion accessible worldwide. Shipped our first international orders to the UK and USA.</p>
+                    </div>
+                </div>
+
+                <!-- 2021 -->
+                <div class="timeline-item" style="margin-bottom: 3rem;">
+                    <div class="timeline-content">
+                        <div style="font-size: 3rem; font-weight: bold; color: #2C5530; margin-bottom: 1rem;">2021</div>
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.75rem;">Sustainability Initiative</h3>
+                        <p style="color: #978D83;">Introduced our zero-waste production model and partnered with local communities to create sustainable dyeing practices using natural materials.</p>
+                    </div>
+                </div>
+
+                <!-- 2024 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div style="font-size: 3rem; font-weight: bold; color: #2C5530; margin-bottom: 1rem;">2024</div>
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.75rem;">Global Expansion</h3>
+                        <p style="color: #978D83;">Opened showrooms in London and New York, bringing our heritage to the global fashion capitals while maintaining our roots in Lagos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="section bg-white">
+        <div class="container">
+            <h2 class="section-title text-center">Our Core Values</h2>
+            <div class="grid grid-4">
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Authenticity</h3>
+                    <p style="color: #978D83;">Every piece is crafted using traditional techniques passed down through generations, ensuring genuine African heritage in every stitch.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="icon-circle" style="background-color: #D4774E;">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Excellence</h3>
+                    <p style="color: #978D83;">We maintain the highest standards in fabric selection, craftsmanship, and finishing to deliver pieces that last for generations.</p>
+                    </div>
+
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Sustainability</h3>
+                    <p style="color: #978D83;">Committed to eco-friendly practices, from natural dyes to zero-waste production, protecting our planet for future generations.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="icon-circle" style="background-color: #D4774E;">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Community</h3>
+                    <p style="color: #978D83;">We invest in artisan communities, providing fair wages, training, and opportunities that uplift entire families and regions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="section bg-beige">
+        <div class="container">
+            <div class="founder-section">
+                <div class="founder-img">
+                    <img src="Images/CEO-IMG.jpg" alt="Inioluwa Adesina - Founder">
+                </div>
+                <div class="founder-content">
+                    <h2 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 1.5rem;">A Note from Our Founder</h2>
+                    <p class="text-lg">
+                        "Growing up surrounded by the vibrant markets of Lagos, I was captivated by the stories woven into every fabric. Each pattern, each color held meaning – celebrations, heritage, identity.
+                    </p>
+                    <p class="text-lg">
+                        Inibae Collections is my love letter to African craftsmanship. We're not just preserving tradition; we're reimagining it for the modern world. Every piece we create honors our past while embracing our future.
+                    </p>
+                    <p class="text-lg">
+                        Thank you for being part of this journey. When you wear Inibae, you carry forward centuries of artistry and countless stories of resilience, creativity, and pride."
+                    </p>
+                    <div class="mt-8">
+                        <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.25rem;">Folake Adeyemi</p>
+                        <p style="color: #978D83;">Founder & Creative Director</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 1.5rem;">Experience the Inibae Difference</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 48rem; margin-left: auto; margin-right: auto;">Discover our latest collection and become part of our growing global family</p>
+            <div class="flex flex-col gap-4 justify-center" style="flex-wrap: wrap;">
+                <a href="Shop.html" class="btn btn-primary">Shop Our Collection</a>
+                <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo-container mb-4">
+                        <div class="logo-circle">
+                            <span style="color: white; font-weight: bold; font-size: 1.25rem;">I</span>
+                        </div>
+                        <h2 style="font-size: 1.5rem; font-weight: bold;">Inibae Collections</h2>
+                    </div>
+                    <p style="color: #999;">Celebrating African heritage through premium fashion and textiles since 2015.</p>
+                </div>
+                <div>
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="Home.html">Home</a></li>
+                        <li><a href="Shop.html">Shop</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Ankara Dresses</a></li>
+                        <li><a href="#">Aso Oke Outfits</a></li>
+                        <li><a href="#">Adire Collection</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Newsletter</h3>
+                    <p style="color: #999; margin-bottom: 1rem;">Subscribe for updates and exclusive offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" class="newsletter-input">
+                        <button type="submit" class="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #555; padding-top: 2rem; text-align: center; color: #999;">
+                <p>&copy; 2026 Inibae Collections. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/2348012345678" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // Animated Counter
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-count'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for Stats
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            statObserver.observe(stat);
+        });
+
+        // Timeline Animation
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            timelineObserver.observe(item);
+        });
+    </script>
+</body>
+</html>
