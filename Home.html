@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover authentic African luxury fashion. Shop Ankara, Aso Oke, and Adire collections blending tradition with contemporary style.">
+    <title>Inibae Collections | Premium African Native Fabrics</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "Inibae Collections",
+      "description": "Home of Native Fabrics - Premium African Fashion",
+      "url": "https://inibaecollections.com"
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --rust: #B8572A;
+            --terracotta: #D4774E;
+            --deep-green: #2C5530;
+            --cream: #F5F1E8;
+            --beige: #E8DCC4;
+            --warm-gray: #978D83;
+            --charcoal: #2A2522;
+            --gold: #D4AF37;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 { font-family: 'Cormorant Garamond', serif; }
+        
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4z' fill='%238C6D46' fill-opacity='0.05'/%3E%3C/svg%3E");
+        }
+        
+        .btn-primary {
+            background: var(--rust);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn-primary:hover {
+            background: var(--terracotta);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(184, 87, 42, 0.3);
+        }
+        
+        @media (max-width: 640px) {
+            .btn-primary {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        @media (max-width: 768px) {
+            .product-img { height: 280px; }
+        }
+        
+        @media (max-width: 480px) {
+            .product-img { height: 320px; }
+        }
+        
+        .product-card:hover .product-img { transform: scale(1.05); }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--rust);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-scrolled {
+            background: white !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 9999;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Logo responsive styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-image {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+            transition: height 0.3s ease;
+            border-radius: 50%;
+        }
+        
+        @media (min-width: 640px) {
+            .logo-container {
+                gap: 0.75rem;
+            }
+            .logo-image {
+                height: 40px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .logo-image {
+                height: 48px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .logo-container {
+                gap: 1rem;
+            }
+            .logo-image {
+                height: 52px;
+            }
+        }
+        
+        .logo-text {
+            font-size: 1rem;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        
+        @media (min-width: 640px) {
+            .logo-text {
+                font-size: 1.25rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .logo-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 0.875rem;
+            }
+            .logo-image {
+                height: 28px;
+            }
+        }
+        
+        /* Hero responsive text */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem !important; }
+            .hero-subtitle { font-size: 1.5rem !important; }
+            .hero-tagline { font-size: 1.1rem !important; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title { font-size: 2.5rem !important; }
+            .hero-subtitle { font-size: 1.2rem !important; }
+            .hero-tagline { font-size: 1rem !important; }
+        }
+        
+        /* Section responsive spacing */
+        @media (max-width: 768px) {
+            .section-py { padding-top: 3rem; padding-bottom: 3rem; }
+            .section-title { font-size: 2.5rem !important; }
+        }
+        
+        @media (max-width: 480px) {
+            .section-py { padding-top: 2rem; padding-bottom: 2rem; }
+            .section-title { font-size: 2rem !important; }
+        }
+        
+        /* Grid responsive */
+        .responsive-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        
+        @media (max-width: 640px) {
+            .responsive-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Form responsive */
+        input, textarea, select {
+            font-size: 16px !important; /* Prevents zoom on iOS */
+        }
+        
+        /* WhatsApp button responsive */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 480px) {
+            .whatsapp-btn {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem;
+            }
+            .whatsapp-btn svg {
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+        }
+        
+        /* Hero Carousel Styles - Clear and Visible */
+        .carousel-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-slide.transitioning-out {
+            filter: blur(8px);
+            transition: filter 0.5s ease-in-out, opacity 1.5s ease-in-out;
+        }
+        
+        .hero-bg-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Light overlay for text readability - much lighter than before */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.15));
+        }
+        
+        /* Text shadow for better readability */
+        .hero-text-shadow {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6),
+                         0px 0px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.75rem;
+            z-index: 20;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .carousel-indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 2px solid white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 20;
+            backdrop-filter: blur(5px);
+        }
+        
+        .carousel-nav:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-nav.prev {
+            left: 2rem;
+        }
+        
+        .carousel-nav.next {
+            right: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .carousel-nav.prev {
+                left: 1rem;
+            }
+            
+            .carousel-nav.next {
+                right: 1rem;
+            }
+            
+            .carousel-indicators {
+                bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 transition-all duration-300 bg-transparent" id="mainNav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <a href="#home" class="logo-container" style="font-family: 'Cormorant Garamond', serif;">
+                    <img src="Images/logo.png" alt="Inibae Collections Logo" class="logo-image">
+                    <span class="logo-text font-bold">Inibae Collections</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex space-x-6 xl:space-x-8">
+                    <a href="#home" class="hover:text-rust transition text-sm xl:text-base">Home</a>
+                    <a href="#about" class="hover:text-rust transition text-sm xl:text-base">About</a>
+                    <a href="#collections" class="hover:text-rust transition text-sm xl:text-base">Collections</a>
+                    <a href="#fabric" class="hover:text-rust transition text-sm xl:text-base">Craftsmanship</a>
+                    <a href="#testimonials" class="hover:text-rust transition text-sm xl:text-base">Testimonials</a>
+                    <a href="#contact" class="hover:text-rust transition text-sm xl:text-base">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4 sm:space-x-6">
+                    <button id="cartBtn" class="relative hover:text-rust transition">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="lg:hidden hover:text-rust transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-2xl font-bold" style="font-family: 'Cormorant Garamond', serif;">Menu</span>
+                <button id="closeMobileMenu" class="p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6">
+                <a href="#home" class="text-xl font-semibold hover:text-rust transition mobile-nav-link">Home</a>
+                <a href="#about" class="text-xl font-semibold hover:text-rust transition mobile-nav-link">About</a>
+                <a href="#collections" class="text-xl font-semibold hover:text-rust transition mobile-nav-link">Collections</a>
+                <a href="#fabric" class="text-xl font-semibold hover:text-rust transition mobile-nav-link">Craftsmanship</a>
+                <a href="#testimonials" class="text-xl font-semibold hover:text-rust transition mobile-nav-link">Testimonials</a>
+                <a href="#contact" class="text-xl font-semibold hover:text-rust transition mobile-nav-link">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section with Carousel - Clear Visible Images -->
+    <section id="home" class="carousel-container">
+        <!-- Slide 1 -->
+        <div class="carousel-slide active">
+            <img src="Images/inibae-IMG.png" alt="Inibae Collections" class="hero-bg-image">
+            <div class="hero-overlay"></div>
+            <div class="relative z-10 h-full flex items-center justify-center">
+                <div class="text-center text-white px-4 max-w-4xl">
+                    <h1 class="hero-title hero-text-shadow text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6">Inibae Collections</h1>
+                    <p class="hero-subtitle hero-text-shadow text-xl sm:text-2xl md:text-3xl mb-2 sm:mb-4 font-light">Home of Native Fabrics</p>
+                    <p class="hero-tagline hero-text-shadow text-lg sm:text-xl mb-8 sm:mb-12">Where Tradition Meets Style</p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+                        <a href="#collections" class="btn-primary w-full sm:w-auto">Shop Collection</a>
+                        <a href="#about" class="bg-white/20 backdrop-blur-sm border-2 border-white px-6 sm:px-8 py-3 rounded-md hover:bg-white hover:text-charcoal transition text-white w-full sm:w-auto">Our Heritage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+            <img src="Images/IMG-3.jpg" alt="Authentic Ankara" class="hero-bg-image">
+            <div class="hero-overlay"></div>
+            <div class="relative z-10 h-full flex items-center justify-center">
+                <div class="text-center text-white px-4 max-w-4xl">
+                    <h1 class="hero-title hero-text-shadow text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6">Authentic Ankara</h1>
+                    <p class="hero-subtitle hero-text-shadow text-xl sm:text-2xl md:text-3xl mb-2 sm:mb-4 font-light">Vibrant Patterns, Bold Statement</p>
+                    <p class="hero-tagline hero-text-shadow text-lg sm:text-xl mb-8 sm:mb-12">Celebrate Your Heritage in Style</p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+                        <a href="#collections" class="btn-primary w-full sm:w-auto">Explore Ankara</a>
+                        <a href="#fabric" class="bg-white/20 backdrop-blur-sm border-2 border-white px-6 sm:px-8 py-3 rounded-md hover:bg-white hover:text-charcoal transition text-white w-full sm:w-auto">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=1920" alt="Luxurious Aso Oke" class="hero-bg-image">
+            <div class="hero-overlay"></div>
+            <div class="relative z-10 h-full flex items-center justify-center">
+                <div class="text-center text-white px-4 max-w-4xl">
+                    <h1 class="hero-title hero-text-shadow text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6">Luxurious Aso Oke</h1>
+                    <p class="hero-subtitle hero-text-shadow text-xl sm:text-2xl md:text-3xl mb-2 sm:mb-4 font-light">Handwoven Excellence</p>
+                    <p class="hero-tagline hero-text-shadow text-lg sm:text-xl mb-8 sm:mb-12">The Fabric of Royalty</p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+                        <a href="#collections" class="btn-primary w-full sm:w-auto">View Aso Oke</a>
+                        <a href="#testimonials" class="bg-white/20 backdrop-blur-sm border-2 border-white px-6 sm:px-8 py-3 rounded-md hover:bg-white hover:text-charcoal transition text-white w-full sm:w-auto">Customer Stories</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=1920" alt="Timeless Adire" class="hero-bg-image">
+            <div class="hero-overlay"></div>
+            <div class="relative z-10 h-full flex items-center justify-center">
+                <div class="text-center text-white px-4 max-w-4xl">
+                    <h1 class="hero-title hero-text-shadow text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6">Timeless Adire</h1>
+                    <p class="hero-subtitle hero-text-shadow text-xl sm:text-2xl md:text-3xl mb-2 sm:mb-4 font-light">Indigo Artistry</p>
+                    <p class="hero-tagline hero-text-shadow text-lg sm:text-xl mb-8 sm:mb-12">Ancient Craft, Modern Appeal</p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+                        <a href="#collections" class="btn-primary w-full sm:w-auto">Discover Adire</a>
+                        <a href="#contact" class="bg-white/20 backdrop-blur-sm border-2 border-white px-6 sm:px-8 py-3 rounded-md hover:bg-white hover:text-charcoal transition text-white w-full sm:w-auto">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="carousel-nav prev" id="prevSlide" aria-label="Previous slide">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        <button class="carousel-nav next" id="nextSlide" aria-label="Next slide">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+
+        <!-- Indicators -->
+        <div class="carousel-indicators" id="carouselIndicators">
+            <button class="carousel-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
+            <button class="carousel-indicator" data-slide="1" aria-label="Go to slide 2"></button>
+            <button class="carousel-indicator" data-slide="2" aria-label="Go to slide 3"></button>
+            <button class="carousel-indicator" data-slide="3" aria-label="Go to slide 4"></button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-py py-12 sm:py-16 lg:py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center fade-in">
+                <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                    <img src="https://images.unsplash.com/photo-1583391733981-0f6a462d8e95?w=600" alt="African Fashion" class="rounded-lg shadow-lg w-full h-48 sm:h-56 lg:h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=600" alt="Ankara" class="rounded-lg shadow-lg w-full h-48 sm:h-56 lg:h-64 object-cover mt-4 sm:mt-8">
+                    <img src="https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=600" alt="Weaving" class="rounded-lg shadow-lg w-full h-48 sm:h-56 lg:h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" alt="Model" class="rounded-lg shadow-lg w-full h-48 sm:h-56 lg:h-64 object-cover mt-4 sm:mt-8">
+                </div>
+                <div>
+                    <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">African Creativity Meets Contemporary Elegance</h2>
+                    <p class="text-base sm:text-lg mb-4 sm:mb-6 text-warm-gray leading-relaxed">
+                        At Inibae Collections, we celebrate the rich heritage of African textiles by transforming traditional fabrics into modern masterpieces. Each piece tells a story of craftsmanship, cultural pride, and timeless beauty.
+                    </p>
+                    <p class="text-base sm:text-lg mb-6 sm:mb-8 text-warm-gray leading-relaxed">
+                        From the handwoven luxury of Aso Oke to the indigo artistry of Adire, we curate collections that honor our ancestors while embracing contemporary style.
+                    </p>
+                    <a href="#fabric" class="btn-primary">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="section-py py-12 sm:py-16 lg:py-20 px-4 pattern-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8 sm:mb-12 lg:mb-16 fade-in">
+                <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4">Featured Collections</h2>
+                <p class="text-base sm:text-lg lg:text-xl text-warm-gray px-4">Discover our curated selection of premium native fabrics</p>
+            </div>
+
+            <div class="responsive-grid mb-8 sm:mb-12" id="productGrid"></div>
+
+            <div class="text-center">
+                <a href="#collections" class="btn-primary">View All Collections</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fabric & Craftsmanship -->
+    <section id="fabric" class="section-py py-12 sm:py-16 lg:py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8 sm:mb-12 lg:mb-16 fade-in">
+                <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">The Art Behind the Fabric</h2>
+                <p class="text-base sm:text-lg lg:text-xl text-warm-gray px-4">Explore the heritage and craftsmanship of African textiles</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <div class="bg-cream p-6 sm:p-8 rounded-lg text-center fade-in">
+                    <div class="text-5xl sm:text-6xl mb-3 sm:mb-4">🧵</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Aso Oke</h3>
+                    <p class="text-sm sm:text-base text-warm-gray">Handwoven luxury fabric from Yoruba artisans, symbolizing prestige and tradition.</p>
+                </div>
+                <div class="bg-cream p-6 sm:p-8 rounded-lg text-center fade-in">
+                    <div class="text-5xl sm:text-6xl mb-3 sm:mb-4">💙</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Adire</h3>
+                    <p class="text-sm sm:text-base text-warm-gray">Indigo-dyed resist fabric with intricate patterns, a timeless Nigerian art form.</p>
+                </div>
+                <div class="bg-cream p-6 sm:p-8 rounded-lg text-center fade-in">
+                    <div class="text-5xl sm:text-6xl mb-3 sm:mb-4">🎨</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Ankara</h3>
+                    <p class="text-sm sm:text-base text-warm-gray">Vibrant wax print fabric with bold African-inspired patterns and colors.</p>
+                </div>
+                <div class="bg-cream p-6 sm:p-8 rounded-lg text-center fade-in">
+                    <div class="text-5xl sm:text-6xl mb-3 sm:mb-4">✨</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Batik</h3>
+                    <p class="text-sm sm:text-base text-warm-gray">Wax-resist dyed fabric creating unique, artistic expressions of culture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section-py py-12 sm:py-16 lg:py-20 px-4 bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8 sm:mb-12 lg:mb-16 fade-in">
+                <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">What Our Customers Say</h2>
+                <p class="text-base sm:text-lg lg:text-xl text-warm-gray px-4">Voices from our community</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="testimonialsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-py py-12 sm:py-16 lg:py-20 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8 sm:mb-12 lg:mb-16 fade-in">
+                <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">Let's Create Something Beautiful</h2>
+                <p class="text-base sm:text-lg lg:text-xl text-warm-gray px-4">Get in touch for custom orders or inquiries</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <form id="contactForm" class="space-y-4 sm:space-y-6">
+                    <div>
+                        <label class="block mb-2 font-semibold text-sm sm:text-base">Name *</label>
+                        <input type="text" required class="w-full px-4 py-3 border-2 border-beige rounded-md focus:border-rust focus:outline-none text-base">
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-semibold text-sm sm:text-base">Email *</label>
+                        <input type="email" required class="w-full px-4 py-3 border-2 border-beige rounded-md focus:border-rust focus:outline-none text-base">
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-semibold text-sm sm:text-base">Subject</label>
+                        <input type="text" class="w-full px-4 py-3 border-2 border-beige rounded-md focus:border-rust focus:outline-none text-base">
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-semibold text-sm sm:text-base">Message *</label>
+                        <textarea required rows="5" class="w-full px-4 py-3 border-2 border-beige rounded-md focus:border-rust focus:outline-none text-base"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">Send Message</button>
+                </form>
+
+                <div class="space-y-4 sm:space-y-6">
+                    <div class="bg-cream p-5 sm:p-6 rounded-lg">
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">📧 Email</h3>
+                        <a href="mailto:hello@inibaecollections.com" class="text-rust hover:underline text-sm sm:text-base">hello@inibaecollections.com</a>
+                    </div>
+                    <div class="bg-cream p-5 sm:p-6 rounded-lg">
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">📱 WhatsApp</h3>
+                        <a href="https://wa.me/2348012345678" class="text-rust hover:underline text-sm sm:text-base">+234 801 234 5678</a>
+                    </div>
+                    <div class="bg-cream p-5 sm:p-6 rounded-lg">
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">📍 Location</h3>
+                        <p class="text-warm-gray text-sm sm:text-base">Lagos, Nigeria</p>
+                    </div>
+                    <div class="bg-cream p-5 sm:p-6 rounded-lg">
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">🕒 Business Hours</h3>
+                        <p class="text-warm-gray text-sm sm:text-base">Mon-Sat: 9AM - 6PM WAT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 sm:py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4" style="font-family: 'Cormorant Garamond', serif;">Inibae Collections</h3>
+                    <p class="text-gray-400 text-sm sm:text-base">Home of Native Fabrics. Celebrating African heritage through contemporary fashion.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Shop</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm sm:text-base">
+                        <li><a href="#collections" class="hover:text-white transition">Ankara Collection</a></li>
+                        <li><a href="#collections" class="hover:text-white transition">Aso Oke Collection</a></li>
+                        <li><a href="#collections" class="hover:text-white transition">Adire Collection</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Company</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm sm:text-base">
+                        <li><a href="#about" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#fabric" class="hover:text-white transition">Craftsmanship</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Newsletter</h4>
+                    <form id="newsletterForm" class="flex flex-col gap-2">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-rust text-base" required>
+                        <button type="submit" class="btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 sm:pt-8 text-center text-gray-400 text-sm sm:text-base">
+                <p>&copy; 2026 Inibae Collections. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/2348012345678" target="_blank" class="whatsapp-btn bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all hover:scale-110" aria-label="Contact us on WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        // Hero Carousel Functionality with Blur Transition
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        const totalSlides = slides.length;
+        let autoplayInterval;
+        let isTransitioning = false;
+
+        function showSlide(index) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            // Add blur effect to current slide
+            slides[currentSlide].classList.add('transitioning-out');
+
+            setTimeout(() => {
+                // Remove active class from all slides and indicators
+                slides.forEach(slide => {
+                    slide.classList.remove('active', 'transitioning-out');
+                });
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                // Add active class to new slide and indicator
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+                currentSlide = index;
+                
+                isTransitioning = false;
+            }, 500); // Wait for blur transition
+        }
+
+        function nextSlide() {
+            let next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            let prev = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(prev);
+        }
+
+        function startAutoplay() {
+            autoplayInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoplay() {
+            clearInterval(autoplayInterval);
+        }
+
+        // Event listeners for navigation
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            nextSlide();
+            stopAutoplay();
+            startAutoplay();
+        });
+
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            prevSlide();
+            stopAutoplay();
+            startAutoplay();
+        });
+
+        // Event listeners for indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                if (index !== currentSlide) {
+                    showSlide(index);
+                    stopAutoplay();
+                    startAutoplay();
+                }
+            });
+        });
+
+        // Pause autoplay on hover
+        const carouselContainer = document.querySelector('.carousel-container');
+        carouselContainer.addEventListener('mouseenter', stopAutoplay);
+        carouselContainer.addEventListener('mouseleave', startAutoplay);
+
+        // Start autoplay when page loads
+        startAutoplay();
+
+        // Touch support for mobile swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carouselContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+                stopAutoplay();
+                startAutoplay();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+                stopAutoplay();
+                startAutoplay();
+            }
+        }
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const mainNav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                mainNav.classList.add('nav-scrolled');
+            } else {
+                mainNav.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
